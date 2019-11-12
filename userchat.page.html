@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="Verify" *ngIf="first">
+    <ion-card class="ion-margin-start ion-margin-end">
+        <ion-card-content style="background-color:rgb(41,190,193);">
+         
+    
+            <h2 style="color:white">Verify Phone Number</h2>
+            <div id="recaptcha-container"></div>
+         
+        <ion-input type="text" placeholder="Enter phone number" [(ngModel)]="phone" ></ion-input>
+          <ion-button ion-button (click)="signIn()" [disabled]="">Request OTP</ion-button>
+    
+        </ion-card-content>
+      </ion-card>
+      
+  </div>
+    <div class="send" *ngIf="second">
+        <ion-card class="ion-margin-start ion-margin-end">
+            <ion-card-content  style="background-color:rgb(41,190,193);">
+      <h2 style="color:white">Verification</h2>
+      
+  <ion-input type="text" placeholder="Verification code" [(ngModel)]="code"  ></ion-input><ion-text routerLink="/newsfeed " float-right href="resend()" color="danger"><span color="warning"> resend</span></ion-text>
+  <ion-button ion-button block (click)="onverify()">Send</ion-button>
+</ion-card-content>
+</ion-card>
+  </div>
+
+
+<div *ngIf="third">
+  
+  <div class="ion-padding">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-2">
+        <h5 *ngIf="!receiver">Select a institution to start a chat!</h5>
+
+          <div *ngFor="let i of institution">
+            <ion-card *ngIf="i.id != userid">
+              <a class="d-flex justify-content-between" (click)="showMessage(i)">
+                <ion-card-header>
+                  <ion-avatar>
+                    <ion-img src="{{i.image}}" alt="avatar"></ion-img>
+                  </ion-avatar>
+
+                  <ion-card-title><strong>{{i.name}}</strong></ion-card-title>
+                  
+                </ion-card-header>
+              </a>
+              
+              <ion-card-content>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="col-md-6 col-xl-9 pl-md-3 px-lg-auto px-0">
+      <div class="chat-message">
+    
+      </div>
+    </div>
+  </div>
+  <div class="chartbox" >
+    <form class="formG" [formGroup]="message">
+
+    
+
+  
+    <ion-label>Charting with campaign Creators</ion-label><br>
+    <ion-textarea type="textarea" formControlName="message" placeholder="Type your message here" >{{c.comment}}</ion-textarea>
+     <ion-button  (click)="commentAdd(p)">send</ion-button>
+  </form>
+  </div>
+</div>
+
+
+  
+  
+</ion-content>
